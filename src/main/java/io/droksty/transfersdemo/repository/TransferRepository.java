@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TransferRepository extends JpaRepository<Transfer, Integer> {
-    List<Transfer>  findAllByPickupDateEqualsOrderByPickupTimeAsc(LocalDate date);
+    List<Transfer> findAllByPickupDateEqualsOrderByPickupTimeAsc(LocalDate date);
+    List<Transfer> findAllByPickupDateBetweenOrderByPickupDateAscPickupTimeAsc(LocalDate from, LocalDate to);
 
 }

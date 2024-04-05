@@ -14,4 +14,5 @@ public interface TransferService {
 
     boolean existsById(Integer Id);
     List<Transfer> getTransfersByDate(LocalDate date);
+    List<Transfer> getTransfersByDatesBetween(LocalDate from, LocalDate to);
 }

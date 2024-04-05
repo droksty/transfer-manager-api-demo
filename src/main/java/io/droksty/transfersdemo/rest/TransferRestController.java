@@ -65,4 +65,12 @@ public class TransferRestController {
         // Add DTO mapping
         return new ResponseEntity<>(transfers, HttpStatus.OK);
     }
+
+
+    @GetMapping("dates-between")
+    public ResponseEntity<List<Transfer>> getTransfersByDatesBetween(@RequestParam LocalDate from, LocalDate to) {
+        var transfers = service.getTransfersByDatesBetween(from, to);
+        // Add DTO mapping
+        return new ResponseEntity<>(transfers, HttpStatus.OK);
+    }
 }

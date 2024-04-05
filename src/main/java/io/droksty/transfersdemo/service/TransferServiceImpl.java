@@ -51,4 +51,9 @@ public class TransferServiceImpl implements TransferService {
         return transferRepository.findAllByPickupDateEqualsOrderByPickupTimeAsc(date);
     }
 
+    @Override
+    public List<Transfer> getTransfersByDatesBetween(LocalDate from, LocalDate to) {
+        return transferRepository.findAllByPickupDateBetweenOrderByPickupDateAscPickupTimeAsc(from, to);
+    }
+
 }
