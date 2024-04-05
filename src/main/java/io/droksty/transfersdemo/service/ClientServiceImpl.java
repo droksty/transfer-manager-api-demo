@@ -30,4 +30,9 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.saveAll(clients);
     }
 
+    @Override
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
+    }
+
 }

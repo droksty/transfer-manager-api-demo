@@ -7,4 +7,5 @@ import java.util.List;
 public interface ClientService {
     Client insertOneClient(Client client);
     List<Client> insertManyClients(List<Client> clients);
+    List<Client> getAllClients();
 }

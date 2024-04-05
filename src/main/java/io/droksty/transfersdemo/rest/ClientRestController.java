@@ -1,6 +1,7 @@
 package io.droksty.transfersdemo.rest;
 
 import io.droksty.transfersdemo.model.Client;
+
 import io.droksty.transfersdemo.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,4 +39,11 @@ public class ClientRestController {
         // Add DTO mapping
         return new ResponseEntity<>(insertedClients, HttpStatus.CREATED);
     }
+
+    @GetMapping("")
+    public ResponseEntity<List<Client>> getAllClients() {
+        var clients = service.getAllClients();
+        return new ResponseEntity<>(clients, HttpStatus.OK);
+    }
+
 }
