@@ -24,11 +24,17 @@ public class ProviderRestController {
 
 
     // Section
-    @PostMapping("/bulk")
+    @PostMapping("")
     public ResponseEntity<List<Provider>> insertProviders(@RequestBody List<Provider> providers) {
         // Add validation
         var insertedProviders = service.insertManyProviders(providers);
         // Add DTO mapping
         return new ResponseEntity<>(insertedProviders, HttpStatus.CREATED);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<Provider>> getAllProviders() {
+        var providers = service.getAllProviders();
+        return new ResponseEntity<>(providers, HttpStatus.OK);
     }
 }

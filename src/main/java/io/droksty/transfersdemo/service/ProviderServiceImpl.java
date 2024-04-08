@@ -24,4 +24,9 @@ public class ProviderServiceImpl implements ProviderService {
     public List<Provider> insertManyProviders(List<Provider> providers) {
         return providerRepository.saveAll(providers);
     }
+
+    @Override
+    public List<Provider> getAllProviders() {
+        return providerRepository.findAll();
+    }
 }

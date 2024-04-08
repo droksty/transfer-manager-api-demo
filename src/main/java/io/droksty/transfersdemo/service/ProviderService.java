@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ProviderService {
     List<Provider> insertManyProviders(List<Provider> providers);
+    List<Provider> getAllProviders();
 }
