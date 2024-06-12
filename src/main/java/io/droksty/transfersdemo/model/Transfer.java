@@ -122,7 +122,7 @@ public class Transfer {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    @JoinColumn(foreignKey = @ForeignKey(name="Client_Id"))
+    @JoinColumn(foreignKey = @ForeignKey(name="ClientId"))
     public Associate getClient() {
         return client;
     }
@@ -132,7 +132,7 @@ public class Transfer {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(foreignKey = @ForeignKey(name = "Operator_Id"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "OperatorId"))
     public Associate getOperator() {
         return operator;
     }
