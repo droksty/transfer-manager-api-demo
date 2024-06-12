@@ -8,6 +8,23 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Encapsulates a Transfer. The following rules apply:
+ * <ul>
+ *     <li>
+ *         A Transfer cannot have nulls on the following fields:
+ *         <ul>
+ *             <li>pickupDate</li>
+ *             <li>pickupTime</li>
+ *             <li>transferFrom</li>
+ *             <li>transferTo</li>
+ *         </ul>
+ *     </li>
+ *     <li>A Transfer may have 0 or 1 clients.</li>
+ *     <li>A Transfer may have 0 or 1 operators.</li>
+ *     <li>A Transfer's client should not be the same as its operator, unless both values are null.</li>
+ * </ul>
+ */
 @Entity
 @Table(name = "Transfers", indexes = { @Index(name = "IX_PickupDate", columnList = "PickupDate") })
 @Data
@@ -15,7 +32,7 @@ public class Transfer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private Integer     id;
+    private Long id;
 
     @Column(nullable = false, name = "PickupDate")
     private LocalDate pickupDate;
@@ -26,8 +43,8 @@ public class Transfer {
     @Column(name = "PassengerName")
     private String passengerName;
 
-    @Column(name = "Pax")
-    private Short pax;
+    @Column(name = "TotalPax")
+    private Integer totalPax;
 
     @Column(name = "Type")
     @Enumerated
@@ -48,31 +65,13 @@ public class Transfer {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @JoinColumn(foreignKey = @ForeignKey(name="Client_Id"))
-    private Client client;
+    private Associate client;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(foreignKey = @ForeignKey(name = "Provider_Id"))
-    private Provider provider;
+    @JoinColumn(foreignKey = @ForeignKey(name = "Operator_Id"))
+    private Associate operator;
 
-    @Column(name = "ProviderCost")
-    private Float providerCost;
-
-
-    // Υποπερίπτωση όπου ένα transfer εκτελέστηκε από περισσότερους από έναν Provider ??
-    /*@Column(name = "ProviderPax")
-    private Short       providerPax;*/
-    /*@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(
-            name = "Transfers_Providers",
-            joinColumns = @JoinColumn(
-                    name = "transfer_id",
-                    referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "provider_id",
-                    referencedColumnName = "id"
-            )
-    )
-    private List<Provider> providers = new ArrayList<>();*/
+    @Column(name = "OperatorCost")
+    private Float operatorCost;
 }

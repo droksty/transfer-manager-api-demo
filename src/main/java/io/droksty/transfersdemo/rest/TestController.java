@@ -1,6 +1,6 @@
 package io.droksty.transfersdemo.rest;
 
-import io.droksty.transfersdemo.service.ClientService;
+import io.droksty.transfersdemo.service.AssociateService;
 import io.droksty.transfersdemo.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
 
     // Section
-    private final ClientService clientService;
+    private final AssociateService associateService;
     private final TransferService transferService;
 
     @Autowired
-    TestController(ClientService clientService, TransferService transferService) {
-        this.clientService = clientService;
+    TestController(AssociateService associateService, TransferService transferService) {
+        this.associateService = associateService;
         this.transferService = transferService;
     }
 
