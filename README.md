@@ -2,4 +2,4 @@
 ##
 ##### Versions:
 ###### 0.0.1-SNAPSHOT : A very basic, but fully functional implementation.
-###### 0.1.0-SNAPSHOT : work in progress
+###### 0.1.0-SNAPSHOT : Refactor Client & Provider classes into the Associate class. Remove Lombok dependency. Follow the annotated JavaBean-style accessors convention. 
