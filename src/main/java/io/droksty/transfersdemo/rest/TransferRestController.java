@@ -51,7 +51,7 @@ public class TransferRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTransfer(@PathVariable("id")Integer id) {
+    public ResponseEntity<String> deleteTransfer(@PathVariable("id")Long id) {
         if (id == null) throw new IllegalArgumentException("Error. Id cannot be null.");
         if (!service.existsById(id)) throw new EntityNotFoundException("Error. Transfer with id: " + id + " does not exist.");
 

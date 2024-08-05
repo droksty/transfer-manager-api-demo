@@ -37,12 +37,12 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public void deleteOneTransfer(Integer id) {
+    public void deleteOneTransfer(Long id) {
         transferRepository.deleteById(id);
     }
 
     @Override
-    public boolean existsById(Integer id) {
+    public boolean existsById(Long id) {
         return transferRepository.existsById(id);
     }
 

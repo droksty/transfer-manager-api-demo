@@ -10,9 +10,9 @@ public interface TransferService {
     Transfer insertOneTransfer(Transfer transfer);
     List<Transfer> insertManyTransfers(List<Transfer> transfers);
     Transfer updateOneTransfer(Transfer transfer);
-    void deleteOneTransfer(Integer id);
+    void deleteOneTransfer(Long id);
 
-    boolean existsById(Integer Id);
+    boolean existsById(Long Id);
     List<Transfer> getTransfersByDate(LocalDate date);
     List<Transfer> getTransfersByDatesBetween(LocalDate from, LocalDate to);
 }
