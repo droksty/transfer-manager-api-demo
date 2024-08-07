@@ -10,6 +10,7 @@ public class Associate {
     private String  title;
 
 
+    // Properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -26,5 +27,15 @@ public class Associate {
     }
     public void setTitle(String title) {
         this.title = title;
+    }
+
+
+    // Object methods
+    @Override
+    public String toString() {
+        return "Associate{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 }
