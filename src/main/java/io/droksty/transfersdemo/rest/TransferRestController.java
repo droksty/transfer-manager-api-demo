@@ -1,7 +1,9 @@
 package io.droksty.transfersdemo.rest;
 
+import io.droksty.transfersdemo.dto.TransferDTO;
 import io.droksty.transfersdemo.model.Transfer;
 import io.droksty.transfersdemo.service.TransferService;
+import io.droksty.transfersdemo.util.Mapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +27,15 @@ public class TransferRestController {
     }
 
 
-    // Section
+    // Endpoints
     @PostMapping("")
-    public ResponseEntity<Transfer> insertTransfer(@RequestBody Transfer transfer) {
-        // Add validation
-        var insertedTransfer = service.insertOneTransfer(transfer);
-        // Add DTO mapping
-        return new ResponseEntity<>(insertedTransfer, HttpStatus.CREATED);
+    public ResponseEntity<TransferDTO> newTransfer(@RequestBody TransferDTO transferDTO) {
+        // Implement validation ?
+        System.out.println(transferDTO);
+        Transfer insertedTransfer = service.insertOneTransfer(transferDTO);
+        System.out.println(insertedTransfer);
+        TransferDTO insertedTransferDTO = Mapper.newTransferDTOFrom(insertedTransfer);
+        return new ResponseEntity<>(insertedTransferDTO, HttpStatus.CREATED);
     }
 
     @PostMapping("/bulk")

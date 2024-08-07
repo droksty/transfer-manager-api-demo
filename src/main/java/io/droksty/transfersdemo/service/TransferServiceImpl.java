@@ -1,7 +1,9 @@
 package io.droksty.transfersdemo.service;
 
+import io.droksty.transfersdemo.dto.TransferDTO;
 import io.droksty.transfersdemo.model.Transfer;
 import io.droksty.transfersdemo.repository.TransferRepository;
+import io.droksty.transfersdemo.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,10 @@ public class TransferServiceImpl implements TransferService {
     }
 
 
-    // Section
+    // Method implementations
     @Override
-    public Transfer insertOneTransfer(Transfer transfer) {
+    public Transfer insertOneTransfer(TransferDTO transferDTO) {
+        Transfer transfer = Mapper.newTransferFrom(transferDTO);
         return transferRepository.save(transfer);
     }
 
