@@ -60,25 +60,26 @@ public class TransferRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTransfer(@PathVariable("id")Long id) {
-        if (id == null) throw new IllegalArgumentException("Error. Id cannot be null.");
-        if (!service.existsById(id)) throw new EntityNotFoundException("Error. Transfer with id: " + id + " does not exist.");
+        if (id == null)
+            throw new IllegalArgumentException("Error. Id cannot be null.");
+        if (!service.existsById(id))
+            throw new EntityNotFoundException("Error. Transfer with id: " + id + " does not exist.");
 
         service.deleteOneTransfer(id);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Transfer>> getTransfersByDate(@RequestParam LocalDate date) {
-        var transfers = service.getTransfersByDate(date);
-        // Add DTO mapping
-        return new ResponseEntity<>(transfers, HttpStatus.OK);
+    public ResponseEntity<List<TransferDTO>> getTransfersByDate(@RequestParam LocalDate date) {
+        List<Transfer> transfers = service.getTransfersByDate(date);
+        List<TransferDTO> transferDTOs = Mapper.newTransferDTOListFrom(transfers);
+        return new ResponseEntity<>(transferDTOs, HttpStatus.OK);
     }
 
-
     @GetMapping("dates-between")
-    public ResponseEntity<List<Transfer>> getTransfersByDatesBetween(@RequestParam LocalDate from, LocalDate to) {
-        var transfers = service.getTransfersByDatesBetween(from, to);
-        // Add DTO mapping
-        return new ResponseEntity<>(transfers, HttpStatus.OK);
+    public ResponseEntity<List<TransferDTO>> getTransfersByDatesBetween(@RequestParam LocalDate from, LocalDate to) {
+        List<Transfer> transfers = service.getTransfersByDatesBetween(from, to);
+        List<TransferDTO> transferDTOs = Mapper.newTransferDTOListFrom(transfers);
+        return new ResponseEntity<>(transferDTOs, HttpStatus.OK);
     }
 }
