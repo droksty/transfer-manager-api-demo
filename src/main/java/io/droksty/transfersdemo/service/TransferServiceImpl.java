@@ -30,7 +30,8 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public List<Transfer> insertManyTransfers(List<Transfer> transfers) {
+    public List<Transfer> insertManyTransfers(List<TransferDTO> transferDTOs) {
+        List<Transfer> transfers = Mapper.newTransferListFrom(transferDTOs);
         return transferRepository.saveAll(transfers);
     }
 

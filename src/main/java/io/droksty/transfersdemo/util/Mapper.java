@@ -3,6 +3,9 @@ package io.droksty.transfersdemo.util;
 import io.droksty.transfersdemo.dto.TransferDTO;
 import io.droksty.transfersdemo.model.Transfer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Mapper {
 
     // No instances of this class should be available
@@ -44,5 +47,16 @@ public final class Mapper {
                 transfer.getOperator(),
                 transfer.getOperatorCost()
         );
+    }
+
+    public static List<Transfer> newTransferListFrom(List<TransferDTO> transferDTOs) {
+        List<Transfer> transfers = new ArrayList<>();
+        transferDTOs.forEach(transferDTO -> transfers.add(newTransferFrom(transferDTO)));
+        return transfers;
+    }
+    public static List<TransferDTO> newTransferDTOListFrom(List<Transfer> transfers) {
+        List<TransferDTO> transferDTOs = new ArrayList<>();
+        transfers.forEach(transfer -> transferDTOs.add(newTransferDTOFrom(transfer)));
+        return transferDTOs;
     }
 }

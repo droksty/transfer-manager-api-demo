@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TransferService {
     Transfer        insertOneTransfer(TransferDTO transferDTO);
-    List<Transfer>  insertManyTransfers(List<Transfer> transfers);
+    List<Transfer>  insertManyTransfers(List<TransferDTO> transferDTOList);
     Transfer        updateOneTransfer(TransferDTO transfer);
     void            deleteOneTransfer(Long id);
 

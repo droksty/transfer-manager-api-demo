@@ -39,11 +39,13 @@ public class TransferRestController {
     }
 
     @PostMapping("/bulk")
-    public ResponseEntity<List<Transfer>> insertTransfers(@RequestBody List<Transfer> transfers) {
-        // Add validation
-        var insertedTransfers = service.insertManyTransfers(transfers);
-        // Add DTO mapping
-        return new ResponseEntity<>(insertedTransfers, HttpStatus.CREATED);
+    public ResponseEntity<List<TransferDTO>> newTransfers(@RequestBody List<TransferDTO> transferDTOs) {
+        // Implement validation ?
+        System.out.println(transferDTOs);
+        List<Transfer> insertedTransfers = service.insertManyTransfers(transferDTOs);
+        System.out.println(insertedTransfers);
+        List<TransferDTO> insertedTransferDTOs = Mapper.newTransferDTOListFrom(insertedTransfers);
+        return new ResponseEntity<>(insertedTransferDTOs, HttpStatus.CREATED);
     }
 
     @PutMapping("")
