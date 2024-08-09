@@ -40,11 +40,12 @@ public final class Transfer {
     // Constructors
     public Transfer() {}
 
-    public Transfer(LocalDate pickupDate, LocalTime pickupTime,
+    public Transfer(Long id, LocalDate pickupDate, LocalTime pickupTime,
                     String passengerName, Integer totalPax, Type type,
                     String transferFrom, String transferTo, Float priceTotal,
                     Float priceNet, Associate client, Associate operator,
                     Float operatorCost) {
+        this.id = id;
         this.pickupDate = pickupDate;
         this.pickupTime = pickupTime;
         this.passengerName = passengerName;
@@ -155,7 +156,7 @@ public final class Transfer {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @JoinColumn(foreignKey = @ForeignKey(name = "OperatorId"))
     public Associate getOperator() {
         return operator;

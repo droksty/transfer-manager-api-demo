@@ -12,6 +12,7 @@ public final class Mapper {
     // Utility methods
     public static Transfer newTransferFrom(TransferDTO transferDTO) {
         return new Transfer(
+                transferDTO.getId(),
                 transferDTO.getPickupDate(),
                 transferDTO.getPickupTime(),
                 transferDTO.getPassengerName(),

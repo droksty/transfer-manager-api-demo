@@ -35,7 +35,8 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public Transfer updateOneTransfer(Transfer transfer) {
+    public Transfer updateOneTransfer(TransferDTO transferDTO) {
+        Transfer transfer = Mapper.newTransferFrom(transferDTO);
         return transferRepository.save(transfer);
     }
 

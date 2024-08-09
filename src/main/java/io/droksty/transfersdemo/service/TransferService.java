@@ -10,7 +10,7 @@ import java.util.List;
 public interface TransferService {
     Transfer        insertOneTransfer(TransferDTO transferDTO);
     List<Transfer>  insertManyTransfers(List<Transfer> transfers);
-    Transfer        updateOneTransfer(Transfer transfer);
+    Transfer        updateOneTransfer(TransferDTO transfer);
     void            deleteOneTransfer(Long id);
 
     boolean         existsById(Long Id);

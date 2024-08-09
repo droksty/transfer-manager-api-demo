@@ -47,11 +47,13 @@ public class TransferRestController {
     }
 
     @PutMapping("")
-    public ResponseEntity<Transfer> updateTransfer(@RequestBody Transfer transfer) {
-        // Add validation
-        var updated = service.updateOneTransfer(transfer);
-        // Add DTO mapping
-        return new ResponseEntity<>(updated, HttpStatus.OK) ;
+    public ResponseEntity<TransferDTO> updateTransfer(@RequestBody TransferDTO transferDTO) {
+        // Implement validation ?
+        System.out.println(transferDTO);
+        Transfer updatedTransfer = service.updateOneTransfer(transferDTO);
+        System.out.println(updatedTransfer);
+        TransferDTO updatedTransferDTO = Mapper.newTransferDTOFrom(updatedTransfer);
+        return new ResponseEntity<>(updatedTransferDTO, HttpStatus.OK) ;
     }
 
     @DeleteMapping("/{id}")
