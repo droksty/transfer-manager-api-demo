@@ -2,12 +2,26 @@ package io.droksty.transfersdemo.model;
 
 import jakarta.persistence.*;
 
+/**
+ * Associate entity bean.
+ * An Associate represents either the client or the operator of a {@link Transfer} entity.
+ */
 @Entity
 @Table(name = "Associates")
-public class Associate {
+public final class Associate {
 
     private Long    id;
     private String  title;
+
+
+    // Constructors
+    public Associate() {
+    }
+
+    public Associate(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
 
 
     // Properties

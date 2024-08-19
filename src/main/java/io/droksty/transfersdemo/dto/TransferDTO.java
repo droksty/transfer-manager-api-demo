@@ -1,6 +1,5 @@
 package io.droksty.transfersdemo.dto;
 
-import io.droksty.transfersdemo.model.Associate;
 import io.droksty.transfersdemo.model.Type;
 
 import java.time.LocalDate;
@@ -17,14 +16,14 @@ public final class TransferDTO {
     private final String          transferTo;
     private final Float           priceTotal;
     private final Float           priceNet;
-    private final Associate       client;
-    private final Associate       operator;
+    private final AssociateDTO    client;
+    private final AssociateDTO    operator;
     private final Float           operatorCost;
 
     public TransferDTO(Long id, LocalDate pickupDate, LocalTime pickupTime,
                        String passengerName, Integer totalPax, Type type,
                        String transferFrom, String transferTo, Float priceTotal,
-                       Float priceNet, Associate client, Associate operator,
+                       Float priceNet, AssociateDTO client, AssociateDTO operator,
                        Float operatorCost) {
         this.id = id;
         this.pickupDate = pickupDate;
@@ -71,16 +70,15 @@ public final class TransferDTO {
     public Float getPriceNet() {
         return priceNet;
     }
-    public Associate getClient() {
+    public AssociateDTO getClient() {
         return client;
     }
-    public Associate getOperator() {
+    public AssociateDTO getOperator() {
         return operator;
     }
     public Float getOperatorCost() {
         return operatorCost;
     }
-
 
 
     @Override
