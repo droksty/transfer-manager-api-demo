@@ -1,8 +1,10 @@
 package io.droksty.transfersdemo.rest;
 
+import io.droksty.transfersdemo.dto.AssociateDTO;
 import io.droksty.transfersdemo.model.Associate;
 
 import io.droksty.transfersdemo.service.AssociateService;
+import io.droksty.transfersdemo.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,20 +28,20 @@ public class AssociateRestController {
 
     // Section
     @PostMapping("")
-    public ResponseEntity<Associate> insertAssociate(@RequestBody Associate associate) {
-        // Add validation
-        var insertedAssociate = service.insertOneAssociate(associate);
-        // Add DTO mapping
-        return new ResponseEntity<>(insertedAssociate, HttpStatus.CREATED);
+    public ResponseEntity<AssociateDTO> newAssociate(@RequestBody AssociateDTO associateDTO) {
+        // Implement validation ?
+        Associate insertedAssociate = service.insertAssociate(associateDTO);
+        AssociateDTO insertedAssociateDTO = Mapper.newAssociateDTOFrom(insertedAssociate);
+        return new ResponseEntity<>(insertedAssociateDTO, HttpStatus.CREATED);
     }
 
-    @PostMapping("/bulk")
+    /*@PostMapping("/bulk")
     public ResponseEntity<List<Associate>> insertAssociates(@RequestBody List<Associate> associates) {
         // Add validation
         var insertedAssociates = service.insertManyAssociates(associates);
         // Add DTO mapping
         return new ResponseEntity<>(insertedAssociates, HttpStatus.CREATED);
-    }
+    }*/
 
     @GetMapping("")
     public ResponseEntity<List<Associate>> getAllAssociates() {
