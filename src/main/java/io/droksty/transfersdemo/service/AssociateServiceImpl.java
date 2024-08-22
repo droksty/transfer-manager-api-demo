@@ -21,11 +21,27 @@ public class AssociateServiceImpl implements AssociateService {
     }
 
 
-    // Section
+    // Method Implementations
     @Override
     public Associate insertAssociate(AssociateDTO associateDTO) {
         Associate associate = Mapper.newAssociateFrom(associateDTO);
         return associateRepository.save(associate);
+    }
+
+    @Override
+    public Associate updateAssociate(AssociateDTO associateDTO) {
+        Associate associate = Mapper.newAssociateFrom(associateDTO);
+        return associateRepository.save(associate);
+    }
+
+    @Override
+    public void deleteAssociate(Long id) {
+        associateRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return associateRepository.existsById(id);
     }
 
     @Override

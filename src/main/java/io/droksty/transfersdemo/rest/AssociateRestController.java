@@ -5,6 +5,7 @@ import io.droksty.transfersdemo.model.Associate;
 
 import io.droksty.transfersdemo.service.AssociateService;
 import io.droksty.transfersdemo.util.Mapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,24 @@ public class AssociateRestController {
         Associate insertedAssociate = service.insertAssociate(associateDTO);
         AssociateDTO insertedAssociateDTO = Mapper.newAssociateDTOFrom(insertedAssociate);
         return new ResponseEntity<>(insertedAssociateDTO, HttpStatus.CREATED);
+    }
+
+    @PutMapping("")
+    public ResponseEntity<AssociateDTO> updateAssociate(@RequestBody AssociateDTO associateDTO) {
+        // Implement validation ?
+        Associate updatedAssociate = service.updateAssociate(associateDTO);
+        AssociateDTO updateAssociateDTO = Mapper.newAssociateDTOFrom(updatedAssociate);
+        return new ResponseEntity<>(updateAssociateDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAssociate(@PathVariable("id") Long id) {
+        if (id == null)
+            throw new IllegalArgumentException("Error. Id cannot be null");
+        if (!service.existsById(id))
+            throw new EntityNotFoundException("Error. Associate wih Id:" + id + " does not exist.");
+        service.deleteAssociate(id);
+        return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
     @GetMapping("")
