@@ -28,11 +28,6 @@ public class AssociateServiceImpl implements AssociateService {
         return associateRepository.save(associate);
     }
 
-    /*@Override
-    public List<Associate> insertManyAssociates(List<Associate> associates) {
-        return associateRepository.saveAll(associates);
-    }*/
-
     @Override
     public List<Associate> getAllAssociates() {
         return associateRepository.findAll();

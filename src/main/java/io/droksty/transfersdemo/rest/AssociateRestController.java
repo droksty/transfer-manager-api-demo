@@ -26,7 +26,7 @@ public class AssociateRestController {
     }
 
 
-    // Section
+    // Endpoints
     @PostMapping("")
     public ResponseEntity<AssociateDTO> newAssociate(@RequestBody AssociateDTO associateDTO) {
         // Implement validation ?
@@ -35,18 +35,11 @@ public class AssociateRestController {
         return new ResponseEntity<>(insertedAssociateDTO, HttpStatus.CREATED);
     }
 
-    /*@PostMapping("/bulk")
-    public ResponseEntity<List<Associate>> insertAssociates(@RequestBody List<Associate> associates) {
-        // Add validation
-        var insertedAssociates = service.insertManyAssociates(associates);
-        // Add DTO mapping
-        return new ResponseEntity<>(insertedAssociates, HttpStatus.CREATED);
-    }*/
-
     @GetMapping("")
-    public ResponseEntity<List<Associate>> getAllAssociates() {
-        var associates = service.getAllAssociates();
-        return new ResponseEntity<>(associates, HttpStatus.OK);
+    public ResponseEntity<List<AssociateDTO>> getAllAssociates() {
+        List<Associate> associates = service.getAllAssociates();
+        List<AssociateDTO> associatesDTO = Mapper.newAssociateDTOListFrom(associates);
+        return new ResponseEntity<>(associatesDTO, HttpStatus.OK);
     }
 
 }

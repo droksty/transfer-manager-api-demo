@@ -66,8 +66,14 @@ public final class Mapper {
     }
 
     public static List<TransferDTO> newTransferDTOListFrom(List<Transfer> transfers) {
-        List<TransferDTO> transferDTOs = new ArrayList<>();
-        transfers.forEach(transfer -> transferDTOs.add(newTransferDTOFrom(transfer)));
-        return transferDTOs;
+        List<TransferDTO> transfersDTO = new ArrayList<>();
+        transfers.forEach(transfer -> transfersDTO.add(newTransferDTOFrom(transfer)));
+        return transfersDTO;
+    }
+
+    public static List<AssociateDTO> newAssociateDTOListFrom(List<Associate> associates) {
+        List<AssociateDTO> associatesDTO = new ArrayList<>();
+        associates.forEach(associate -> associatesDTO.add(newAssociateDTOFrom(associate)));
+        return associatesDTO;
     }
 }
