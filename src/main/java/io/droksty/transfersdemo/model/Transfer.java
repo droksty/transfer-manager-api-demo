@@ -30,11 +30,11 @@ public final class Transfer {
     private Type        type;
     private String      transferFrom;
     private String      transferTo;
-    private Float       priceTotal;
-    private Float       priceNet;
+    private Double      priceTotal;
+    private Double      priceNet;
     private Associate   client;
     private Associate   operator;
-    private Float       operatorCost;
+    private Double      operatorCost;
 
 
     // Constructors
@@ -42,9 +42,9 @@ public final class Transfer {
 
     public Transfer(Long id, LocalDate pickupDate, LocalTime pickupTime,
                     String passengerName, Integer totalPax, Type type,
-                    String transferFrom, String transferTo, Float priceTotal,
-                    Float priceNet, Associate client, Associate operator,
-                    Float operatorCost) {
+                    String transferFrom, String transferTo, Double priceTotal,
+                    Double priceNet, Associate client, Associate operator,
+                    Double operatorCost) {
         this.id = id;
         this.pickupDate = pickupDate;
         this.pickupTime = pickupTime;
@@ -130,18 +130,18 @@ public final class Transfer {
     }
 
     @Column(name = "PriceTotal")
-    public Float getPriceTotal() {
+    public Double getPriceTotal() {
         return priceTotal;
     }
-    public void setPriceTotal(Float priceTotal) {
+    public void setPriceTotal(Double priceTotal) {
         this.priceTotal = priceTotal;
     }
 
     @Column(name = "PriceNet")
-    public Float getPriceNet() {
+    public Double getPriceNet() {
         return priceNet;
     }
-    public void setPriceNet(Float priceNet) {
+    public void setPriceNet(Double priceNet) {
         this.priceNet = priceNet;
     }
 
@@ -166,10 +166,10 @@ public final class Transfer {
     }
 
     @Column(name = "OperatorCost")
-    public Float getOperatorCost() {
+    public Double getOperatorCost() {
         return operatorCost;
     }
-    public void setOperatorCost(Float operatorCost) {
+    public void setOperatorCost(Double operatorCost) {
         this.operatorCost = operatorCost;
     }
 

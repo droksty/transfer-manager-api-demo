@@ -6,25 +6,25 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public final class TransferDTO {
-    private final Long            id;
-    private final LocalDate       pickupDate;
-    private final LocalTime       pickupTime;
-    private final String          passengerName;
-    private final Integer         totalPax;
-    private final Type            type;
-    private final String          transferFrom;
-    private final String          transferTo;
-    private final Float           priceTotal;
-    private final Float           priceNet;
-    private final AssociateDTO    client;
-    private final AssociateDTO    operator;
-    private final Float           operatorCost;
+    private final Long          id;
+    private final LocalDate     pickupDate;
+    private final LocalTime     pickupTime;
+    private final String        passengerName;
+    private final Integer       totalPax;
+    private final Type          type;
+    private final String        transferFrom;
+    private final String        transferTo;
+    private final Double        priceTotal;
+    private final Double        priceNet;
+    private final AssociateDTO  client;
+    private final AssociateDTO  operator;
+    private final Double        operatorCost;
 
     public TransferDTO(Long id, LocalDate pickupDate, LocalTime pickupTime,
                        String passengerName, Integer totalPax, Type type,
-                       String transferFrom, String transferTo, Float priceTotal,
-                       Float priceNet, AssociateDTO client, AssociateDTO operator,
-                       Float operatorCost) {
+                       String transferFrom, String transferTo, Double priceTotal,
+                       Double priceNet, AssociateDTO client, AssociateDTO operator,
+                       Double operatorCost) {
         this.id = id;
         this.pickupDate = pickupDate;
         this.pickupTime = pickupTime;
@@ -64,10 +64,10 @@ public final class TransferDTO {
     public String getTransferTo() {
         return transferTo;
     }
-    public Float getPriceTotal() {
+    public Double getPriceTotal() {
         return priceTotal;
     }
-    public Float getPriceNet() {
+    public Double getPriceNet() {
         return priceNet;
     }
     public AssociateDTO getClient() {
@@ -76,7 +76,7 @@ public final class TransferDTO {
     public AssociateDTO getOperator() {
         return operator;
     }
-    public Float getOperatorCost() {
+    public Double getOperatorCost() {
         return operatorCost;
     }
 
