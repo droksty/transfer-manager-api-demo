@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.droksty</groupId>
     <artifactId>transfers-demo</artifactId>
-    <version>0.1.4-SNAPSHOT</version>
+    <version>0.1.5-SNAPSHOT</version>
     <name>transfers-demo</name>
     <description>transfers-demo</description>
     <properties>

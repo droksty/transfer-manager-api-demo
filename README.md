@@ -7,3 +7,4 @@
 ###### 0.1.2-SNAPSHOT : Implement TransferDTO
 ###### 0.1.3-SNAPSHOT : Refactor and implement additional Associate endpoints
 ###### 0.1.4-SNAPSHOT : Implement TransferListView
+###### 0.1.5-SNAPSHOT : Only one /transfers GET endpoint
