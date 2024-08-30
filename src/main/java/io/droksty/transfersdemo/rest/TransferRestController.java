@@ -1,6 +1,7 @@
 package io.droksty.transfersdemo.rest;
 
 import io.droksty.transfersdemo.dto.TransferDTO;
+import io.droksty.transfersdemo.dto.TransferListView;
 import io.droksty.transfersdemo.model.Transfer;
 import io.droksty.transfersdemo.service.TransferService;
 import io.droksty.transfersdemo.util.Mapper;
@@ -44,7 +45,7 @@ public class TransferRestController {
         System.out.println(transferDTOs);
         List<Transfer> insertedTransfers = service.insertManyTransfers(transferDTOs);
         System.out.println(insertedTransfers);
-        List<TransferDTO> insertedTransferDTOs = Mapper.newTransferDTOListFrom(insertedTransfers);
+        List<TransferDTO> insertedTransferDTOs = Mapper.transferListDTOFrom(insertedTransfers);
         return new ResponseEntity<>(insertedTransferDTOs, HttpStatus.CREATED);
     }
 
@@ -71,15 +72,16 @@ public class TransferRestController {
 
     @GetMapping("")
     public ResponseEntity<List<TransferDTO>> getTransfersByDate(@RequestParam LocalDate date) {
-        List<Transfer> transfers = service.getTransfersByDate(date);
-        List<TransferDTO> transfersDTO = Mapper.newTransferDTOListFrom(transfers);
-        return new ResponseEntity<>(transfersDTO, HttpStatus.OK);
+        List<Transfer> transferList = service.getTransfersByDate(date);
+        List<TransferDTO> transferDTOList = Mapper.transferListDTOFrom(transferList);
+        return new ResponseEntity<>(transferDTOList, HttpStatus.OK);
     }
 
     @GetMapping("dates-between")
-    public ResponseEntity<List<TransferDTO>> getTransfersByDatesBetween(@RequestParam LocalDate from, LocalDate to) {
-        List<Transfer> transfers = service.getTransfersByDatesBetween(from, to);
-        List<TransferDTO> transfersDTO = Mapper.newTransferDTOListFrom(transfers);
-        return new ResponseEntity<>(transfersDTO, HttpStatus.OK);
+    public ResponseEntity<TransferListView> getTransfersByDatesBetween(@RequestParam LocalDate from, LocalDate to) {
+        List<Transfer> transferList = service.getTransfersByDatesBetween(from, to);
+        List<TransferDTO> transferDTOList = Mapper.transferListDTOFrom(transferList);
+        TransferListView transferListView = TransferListView.createFrom(transferDTOList);
+        return new ResponseEntity<>(transferListView, HttpStatus.OK);
     }
 }

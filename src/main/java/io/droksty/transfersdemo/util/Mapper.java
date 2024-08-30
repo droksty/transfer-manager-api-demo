@@ -2,6 +2,7 @@ package io.droksty.transfersdemo.util;
 
 import io.droksty.transfersdemo.dto.AssociateDTO;
 import io.droksty.transfersdemo.dto.TransferDTO;
+import io.droksty.transfersdemo.dto.TransferListView;
 import io.droksty.transfersdemo.model.Associate;
 import io.droksty.transfersdemo.model.Transfer;
 
@@ -52,23 +53,29 @@ public final class Mapper {
     }
 
     public static Associate newAssociateFrom(AssociateDTO associateDTO) {
-        return new Associate(associateDTO.getId(), associateDTO.getTitle());
+        return new Associate(
+                associateDTO.getId(),
+                associateDTO.getTitle()
+        );
     }
 
     public static AssociateDTO newAssociateDTOFrom(Associate associate) {
-        return new AssociateDTO(associate.getId(), associate.getTitle());
+        return new AssociateDTO(
+                associate.getId(),
+                associate.getTitle()
+        );
     }
 
-    public static List<Transfer> newTransferListFrom(List<TransferDTO> transferDTOs) {
-        List<Transfer> transfers = new ArrayList<>();
-        transferDTOs.forEach(transferDTO -> transfers.add(newTransferFrom(transferDTO)));
-        return transfers;
+    public static List<Transfer> newTransferListFrom(List<TransferDTO> transferDTOList) {
+        List<Transfer> transferList = new ArrayList<>(transferDTOList.size());
+        transferDTOList.forEach(transferDTO -> transferList.add(newTransferFrom(transferDTO)));
+        return transferList;
     }
 
-    public static List<TransferDTO> newTransferDTOListFrom(List<Transfer> transfers) {
-        List<TransferDTO> transfersDTO = new ArrayList<>();
-        transfers.forEach(transfer -> transfersDTO.add(newTransferDTOFrom(transfer)));
-        return transfersDTO;
+    public static List<TransferDTO> transferListDTOFrom(List<Transfer> transferList) {
+        List<TransferDTO> transferDTOList = new ArrayList<>(transferList.size());
+        transferList.forEach(transfer -> transferDTOList.add(newTransferDTOFrom(transfer)));
+        return transferDTOList;
     }
 
     public static List<AssociateDTO> newAssociateDTOListFrom(List<Associate> associates) {
