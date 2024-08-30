@@ -71,15 +71,10 @@ public class TransferRestController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<TransferDTO>> getTransfersByDate(@RequestParam LocalDate date) {
-        List<Transfer> transferList = service.getTransfersByDate(date);
-        List<TransferDTO> transferDTOList = Mapper.transferListDTOFrom(transferList);
-        return new ResponseEntity<>(transferDTOList, HttpStatus.OK);
-    }
-
-    @GetMapping("dates-between")
     public ResponseEntity<TransferListView> getTransfersByDatesBetween(@RequestParam LocalDate from, LocalDate to) {
-        List<Transfer> transferList = service.getTransfersByDatesBetween(from, to);
+        List<Transfer> transferList = (to == null) ?
+                service.getTransfersByDate(from) :
+                service.getTransfersByDatesBetween(from, to);
         List<TransferDTO> transferDTOList = Mapper.transferListDTOFrom(transferList);
         TransferListView transferListView = TransferListView.createFrom(transferDTOList);
         return new ResponseEntity<>(transferListView, HttpStatus.OK);
