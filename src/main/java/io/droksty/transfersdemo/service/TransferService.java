@@ -14,6 +14,5 @@ public interface TransferService {
     void            deleteOneTransfer(Long id);
 
     boolean         existsById(Long Id);
-    List<Transfer>  getTransfersByDate(LocalDate date);
-    List<Transfer>  getTransfersByDatesBetween(LocalDate from, LocalDate to);
+    List<Transfer>  getTransfersByDatesBetween(LocalDate from, LocalDate to, String client, String operator);
 }

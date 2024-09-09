@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TransferServiceImpl implements TransferService {
@@ -52,13 +54,21 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public List<Transfer> getTransfersByDate(LocalDate date) {
-        return transferRepository.findAllByPickupDateEqualsOrderByPickupTimeAsc(date);
+    public List<Transfer> getTransfersByDatesBetween(LocalDate from, LocalDate to, String client, String operator) {
+        List<Transfer> transfers = transferRepository.findAllByPickupDateBetweenOrderByPickupDateAscPickupTimeAsc(from, to);
+
+        return !client.isEmpty() || !operator.isEmpty() ? filterTransfers(transfers, client, operator) :transfers;
     }
 
-    @Override
-    public List<Transfer> getTransfersByDatesBetween(LocalDate from, LocalDate to) {
-        return transferRepository.findAllByPickupDateBetweenOrderByPickupDateAscPickupTimeAsc(from, to);
-    }
 
+    // Helper
+    private List<Transfer> filterTransfers(List<Transfer> transfers, String client, String operator) {
+        List<Transfer> filteredTransfers = new ArrayList<>();
+        for (Transfer transfer : transfers) {
+            if ((transfer.getClient() != null && transfer.getClient().getTitle().equals(client)) || transfer.getOperator() != null && transfer.getOperator().getTitle().equals(operator)) {
+                filteredTransfers.add(transfer);
+            }
+        }
+        return filteredTransfers;
+    }
 }
