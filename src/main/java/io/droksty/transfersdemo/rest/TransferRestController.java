@@ -53,7 +53,7 @@ public class TransferRestController {
     public ResponseEntity<TransferDTO> updateTransfer(@RequestBody TransferDTO transferDTO) {
         // Implement validation ?
         System.out.println(transferDTO);
-        Transfer updatedTransfer = service.updateOneTransfer(transferDTO);
+        Transfer updatedTransfer = service.updateTransfer(transferDTO);
         System.out.println(updatedTransfer);
         TransferDTO updatedTransferDTO = Mapper.newTransferDTOFrom(updatedTransfer);
         return new ResponseEntity<>(updatedTransferDTO, HttpStatus.OK) ;
@@ -66,7 +66,7 @@ public class TransferRestController {
         if (!service.existsById(id))
             throw new EntityNotFoundException("Error. Transfer with id: " + id + " does not exist.");
 
-        service.deleteOneTransfer(id);
+        service.deleteTransfer(id);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
@@ -75,7 +75,7 @@ public class TransferRestController {
                                                                        @RequestParam(required = false) LocalDate to,
                                                                        @RequestParam(required = false) String client,
                                                                        @RequestParam(required = false) String operator) {
-        List<Transfer> transferList = service.getTransfersByDatesBetween(from, to == null ? from : to, client, operator);
+        List<Transfer> transferList = service.getTransfers(from, to == null ? from : to, client, operator);
         List<TransferDTO> transferDTOList = Mapper.transferListDTOFrom(transferList);
         TransferListView transferListView = TransferListView.createFrom(transferDTOList);
         return new ResponseEntity<>(transferListView, HttpStatus.OK);

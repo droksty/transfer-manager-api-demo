@@ -38,13 +38,13 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public Transfer updateOneTransfer(TransferDTO transferDTO) {
+    public Transfer updateTransfer(TransferDTO transferDTO) {
         Transfer transfer = Mapper.newTransferFrom(transferDTO);
         return transferRepository.save(transfer);
     }
 
     @Override
-    public void deleteOneTransfer(Long id) {
+    public void deleteTransfer(Long id) {
         transferRepository.deleteById(id);
     }
 
@@ -54,7 +54,7 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public List<Transfer> getTransfersByDatesBetween(LocalDate from, LocalDate to, String client, String operator) {
+    public List<Transfer> getTransfers(LocalDate from, LocalDate to, String client, String operator) {
         List<Transfer> transfers = transferRepository.findAllByPickupDateBetweenOrderByPickupDateAscPickupTimeAsc(from, to);
 
         return !client.isEmpty() || !operator.isEmpty() ? filterTransfers(transfers, client, operator) :transfers;
