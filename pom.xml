@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.droksty</groupId>
-    <artifactId>transfers-demo</artifactId>
+    <artifactId>transfer-manager-api-demo</artifactId>
     <version>0.1.6-SNAPSHOT</version>
     <name>transfers-demo</name>
     <description>transfers-demo</description>
