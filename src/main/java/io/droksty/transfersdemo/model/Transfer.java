@@ -21,7 +21,6 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "Transfers", indexes = { @Index(name = "IX_PickupDate", columnList = "PickupDate") })
 public class Transfer {
-
     private Long        id;
     private LocalDate   pickupDate;
     private LocalTime   pickupTime;
