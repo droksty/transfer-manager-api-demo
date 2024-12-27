@@ -4,6 +4,7 @@ import io.droksty.transfersdemo.dto.TransferDTO;
 import io.droksty.transfersdemo.model.Transfer;
 import io.droksty.transfersdemo.repository.TransferRepository;
 import io.droksty.transfersdemo.util.Mapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +40,16 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public Transfer updateTransfer(TransferDTO transferDTO) {
+        if (!existsById(transferDTO.getId()))
+            throw new EntityNotFoundException("Transfer with id " + transferDTO.getId() + " not found");
         Transfer transfer = Mapper.newTransferFrom(transferDTO);
         return transferRepository.save(transfer);
     }
 
     @Override
     public void deleteTransfer(Long id) {
+        if (!existsById(id))
+            throw new EntityNotFoundException("Transfer with id " + id + " not found");
         transferRepository.deleteById(id);
     }
 

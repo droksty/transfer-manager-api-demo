@@ -5,7 +5,6 @@ import io.droksty.transfersdemo.dto.TransferListView;
 import io.droksty.transfersdemo.model.Transfer;
 import io.droksty.transfersdemo.service.TransferService;
 import io.droksty.transfersdemo.util.Mapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +31,6 @@ public class TransferRestController {
     // Endpoints
     @PostMapping("")
     public ResponseEntity<TransferDTO> newTransfer(@RequestBody @Valid TransferDTO transferDTO) {
-        // Implement validation ?
         System.out.println(transferDTO);
         Transfer insertedTransfer = service.insertOneTransfer(transferDTO);
         System.out.println(insertedTransfer);
@@ -42,7 +40,6 @@ public class TransferRestController {
 
     @PostMapping("/bulk")
     public ResponseEntity<List<TransferDTO>> newTransfers(@RequestBody @Valid List<TransferDTO> transferDTOs) {
-        // Implement validation ?
         System.out.println(transferDTOs);
         List<Transfer> insertedTransfers = service.insertManyTransfers(transferDTOs);
         System.out.println(insertedTransfers);
@@ -52,7 +49,7 @@ public class TransferRestController {
 
     @PutMapping("")
     public ResponseEntity<TransferDTO> updateTransfer(@RequestBody @Valid TransferDTO transferDTO) {
-        // Implement validation ?
+        if (transferDTO.getId() == null) throw new IllegalArgumentException("Transfer id is null.");
         System.out.println(transferDTO);
         Transfer updatedTransfer = service.updateTransfer(transferDTO);
         System.out.println(updatedTransfer);
@@ -61,14 +58,9 @@ public class TransferRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTransfer(@PathVariable("id")Long id) {
-        if (id == null)
-            throw new IllegalArgumentException("Error. Id cannot be null.");
-        if (!service.existsById(id))
-            throw new EntityNotFoundException("Error. Transfer with id: " + id + " does not exist.");
-
+    public ResponseEntity<Void> deleteTransfer(@PathVariable("id")Long id) {
         service.deleteTransfer(id);
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("")
