@@ -35,21 +35,22 @@ public final class Mapper {
     }
 
     public static TransferDTO newTransferDTOFrom(Transfer transfer) {
-        return new TransferDTO(
-                transfer.getId(),
-                transfer.getPickupDate(),
-                transfer.getPickupTime(),
-                transfer.getPassengerName(),
-                transfer.getTotalPax(),
-                transfer.getType(),
-                transfer.getTransferFrom(),
-                transfer.getTransferTo(),
-                transfer.getPriceTotal(),
-                transfer.getPriceNet(),
-                transfer.getClient() == null ? null : newAssociateDTOFrom(transfer.getClient()),
-                transfer.getOperator() == null ? null : newAssociateDTOFrom(transfer.getOperator()),
-                transfer.getOperatorCost()
-        );
+        //should clients be transactional?
+        TransferDTO dto = new TransferDTO();
+        dto.setId(transfer.getId());
+        dto.setPickupDate(transfer.getPickupDate());
+        dto.setPickupTime(transfer.getPickupTime());
+        dto.setPassengerName(transfer.getPassengerName());
+        dto.setTotalPax(transfer.getTotalPax());
+        dto.setType(transfer.getType());
+        dto.setTransferFrom(transfer.getTransferFrom());
+        dto.setTransferTo(transfer.getTransferTo());
+        dto.setPriceTotal(transfer.getPriceTotal());
+        dto.setPriceNet(transfer.getPriceNet());
+        dto.setClient(transfer.getClient() == null ? null : newAssociateDTOFrom(transfer.getClient()));
+        dto.setOperator(transfer.getOperator() == null ? null : newAssociateDTOFrom(transfer.getOperator()));
+        dto.setOperatorCost(transfer.getOperatorCost());
+        return dto;
     }
 
     public static Associate newAssociateFrom(AssociateDTO associateDTO) {

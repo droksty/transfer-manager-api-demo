@@ -7,100 +7,119 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public final class TransferDTO {
-    private final Long          id;
-    private final LocalDate     pickupDate;
-    private final LocalTime     pickupTime;
-    private final String        passengerName;
-    private final Integer       totalPax;
-    private final Type          type;
-    private final String        transferFrom;
-    private final String        transferTo;
-    private final Double        priceTotal;
-    private final Double        priceNet;
-    private final AssociateDTO  client;
-    private final AssociateDTO  operator;
-    private final Double        operatorCost;
+    private  Long          id;
+    private  LocalDate     pickupDate;
+    private  LocalTime     pickupTime;
+    private  String        passengerName;
+    private  Integer       totalPax;
+    private  Type          type;
+    private  String        transferFrom;
+    private  String        transferTo;
+    private  Double        priceTotal;
+    private  Double        priceNet;
+    private  AssociateDTO  client;
+    private  AssociateDTO  operator;
+    private  Double        operatorCost;
 
-    public TransferDTO(Long id, LocalDate pickupDate, LocalTime pickupTime,
-                       String passengerName, Integer totalPax, Type type,
-                       String transferFrom, String transferTo, Double priceTotal,
-                       Double priceNet, AssociateDTO client, AssociateDTO operator,
-                       Double operatorCost) {
-        this.id = id;
-        this.pickupDate = pickupDate;
-        this.pickupTime = pickupTime;
-        this.passengerName = passengerName;
-        this.totalPax = totalPax;
-        this.type = type;
-        this.transferFrom = transferFrom == null ? null : transferFrom.trim();
-        this.transferTo = transferTo == null? null : transferTo.trim();
-        this.priceTotal = priceTotal;
-        this.priceNet = priceNet;
-        this.client = client;
-        this.operator = operator;
-        this.operatorCost = operatorCost;
-    }
-
-    public Long getId() {
+    public Long         getId() {
         return id;
+    }
+    public void         setId(Long id) {
+        this.id = id;
     }
 
     @NotNull(message = "Invalid pickupDate: pickupDate is null")
-    public LocalDate getPickupDate() {
+    public LocalDate    getPickupDate() {
         return pickupDate;
+    }
+    public void         setPickupDate(LocalDate pickupDate) {
+        this.pickupDate = pickupDate;
     }
 
     @NotNull(message = "Invalid pickupTime: pickupTime is null")
-    public LocalTime getPickupTime() {
+    public LocalTime    getPickupTime() {
         return pickupTime;
     }
+    public void         setPickupTime(LocalTime pickupTime) {
+        this.pickupTime = pickupTime;
+    }
 
-    public String getPassengerName() {
+    public String       getPassengerName() {
         return passengerName;
+    }
+    public void         setPassengerName(String passengerName) {
+        this.passengerName = passengerName;
     }
 
     @PositiveOrZero(message = "Invalid totalPax: totalPax cannot be a negative number")
-    public Integer getTotalPax()     {
+    public Integer      getTotalPax()     {
         return totalPax;
     }
+    public void         setTotalPax(Integer totalPax) {
+        this.totalPax = totalPax;
+    }
 
-    public Type getType() {
+    public Type         getType() {
         return type;
+    }
+    public void         setType(Type type) {
+        this.type = type;
     }
 
     @NotNull(message = "Invalid transferFrom: transferFrom cannot be null")
     @Size(min = 3, max = 30, message = "Invalid transferFrom: Must be between 3 to 30 characters long.")
-    public String getTransferFrom() {
+    public String       getTransferFrom() {
         return transferFrom;
+    }
+    public void         setTransferFrom(String transferFrom) {
+        this.transferFrom = transferFrom.trim();
     }
 
     @NotNull(message = "Invalid transferTo: transferTo cannot be null")
     @Size(min = 3, max = 30, message = "Invalid transferTo: Must be between 3 to 30 characters long.")
-    public String getTransferTo() {
+    public String       getTransferTo() {
         return transferTo;
+    }
+    public void         setTransferTo(String transferTo) {
+        this.transferTo = transferTo.trim();
     }
 
     @PositiveOrZero(message = "Invalid priceTotal: priceTotal cannot be negative")
-    public Double getPriceTotal() {
+    public Double       getPriceTotal() {
         return priceTotal;
+    }
+    public void         setPriceTotal(Double priceTotal) {
+        this.priceTotal = priceTotal;
     }
 
     @PositiveOrZero(message = "Invalid priceNet: priceNet cannot be negative")
-    public Double getPriceNet() {
+    public Double       getPriceNet() {
         return priceNet;
+    }
+    public void         setPriceNet(Double priceNet) {
+        this.priceNet = priceNet;
     }
 
     public AssociateDTO getClient() {
         return client;
     }
+    public void         setClient(AssociateDTO client) {
+        this.client = client;
+    }
 
     public AssociateDTO getOperator() {
         return operator;
     }
+    public void         setOperator(AssociateDTO operator) {
+        this.operator = operator;
+    }
 
     @PositiveOrZero(message = "Invalid operatorCost: operatorCost cannot be negative")
-    public Double getOperatorCost() {
+    public Double       getOperatorCost() {
         return operatorCost;
+    }
+    public void         setOperatorCost(Double operatorCost) {
+        this.operatorCost = operatorCost;
     }
 
     @Override
