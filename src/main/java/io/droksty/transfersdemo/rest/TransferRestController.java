@@ -6,6 +6,7 @@ import io.droksty.transfersdemo.model.Transfer;
 import io.droksty.transfersdemo.service.TransferService;
 import io.droksty.transfersdemo.util.Mapper;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class TransferRestController {
 
     // Endpoints
     @PostMapping("")
-    public ResponseEntity<TransferDTO> newTransfer(@RequestBody TransferDTO transferDTO) {
+    public ResponseEntity<TransferDTO> newTransfer(@RequestBody @Valid TransferDTO transferDTO) {
         // Implement validation ?
         System.out.println(transferDTO);
         Transfer insertedTransfer = service.insertOneTransfer(transferDTO);
@@ -40,7 +41,7 @@ public class TransferRestController {
     }
 
     @PostMapping("/bulk")
-    public ResponseEntity<List<TransferDTO>> newTransfers(@RequestBody List<TransferDTO> transferDTOs) {
+    public ResponseEntity<List<TransferDTO>> newTransfers(@RequestBody @Valid List<TransferDTO> transferDTOs) {
         // Implement validation ?
         System.out.println(transferDTOs);
         List<Transfer> insertedTransfers = service.insertManyTransfers(transferDTOs);
@@ -50,7 +51,7 @@ public class TransferRestController {
     }
 
     @PutMapping("")
-    public ResponseEntity<TransferDTO> updateTransfer(@RequestBody TransferDTO transferDTO) {
+    public ResponseEntity<TransferDTO> updateTransfer(@RequestBody @Valid TransferDTO transferDTO) {
         // Implement validation ?
         System.out.println(transferDTO);
         Transfer updatedTransfer = service.updateTransfer(transferDTO);
