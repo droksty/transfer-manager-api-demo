@@ -9,3 +9,4 @@
 ###### 0.1.4-SNAPSHOT : Implement TransferListView
 ###### 0.1.5-SNAPSHOT : Only one /transfers GET endpoint
 ###### 0.1.6-SNAPSHOT : Refactor GET endpoint, add filters
+###### 0.1.7-SNAPSHOT : Implement Transfer validation
