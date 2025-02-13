@@ -1,5 +1,6 @@
 package io.droksty.transfersdemo.dto;
 
+import io.droksty.transfersdemo.model.PayerType;
 import io.droksty.transfersdemo.model.Type;
 import jakarta.validation.constraints.*;
 
@@ -7,19 +8,21 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public final class TransferDTO {
-    private  Long          id;
-    private  LocalDate     pickupDate;
-    private  LocalTime     pickupTime;
-    private  String        passengerName;
-    private  Integer       totalPax;
-    private  Type          type;
-    private  String        transferFrom;
-    private  String        transferTo;
-    private  Double        priceTotal;
-    private  Double        priceNet;
-    private  AssociateDTO  client;
-    private  AssociateDTO  operator;
-    private  Double        operatorCost;
+    private Long          id;
+    private LocalDate     pickupDate;
+    private LocalTime     pickupTime;
+    private String        passengerName;
+    private Integer       totalPax;
+    private Type          type;
+    private String        transferFrom;
+    private String        transferTo;
+    private Double        priceTotal;
+    private Double        priceNet;
+    private AssociateDTO  client;
+    private AssociateDTO  operator;
+    private Double        operatorCost;
+    private String        comments;
+    private PayerType       paidBy;
 
     public Long         getId() {
         return id;
@@ -122,6 +125,21 @@ public final class TransferDTO {
         this.operatorCost = operatorCost;
     }
 
+    public String       getComments() {
+        return comments;
+    }
+    public void         setComments(String comments) {
+        this.comments = comments;
+    }
+
+
+    public PayerType    getPaidBy() {
+        return paidBy;
+    }
+    public void         setPaidBy(PayerType paidBy) {
+        this.paidBy = paidBy;
+    }
+
     @Override
     public String toString() {
         return "TransferDTO{" +
@@ -133,11 +151,13 @@ public final class TransferDTO {
                 ", type=" + type +
                 ", transferFrom='" + transferFrom + '\'' +
                 ", transferTo='" + transferTo + '\'' +
+                ", paidBy=" + paidBy +
                 ", priceTotal=" + priceTotal +
                 ", priceNet=" + priceNet +
                 ", client=" + client +
                 ", operator=" + operator +
                 ", operatorCost=" + operatorCost +
+                ", comments='" + comments + '\'' +
                 '}';
     }
 }

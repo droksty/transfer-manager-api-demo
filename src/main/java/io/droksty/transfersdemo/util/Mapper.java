@@ -2,7 +2,6 @@ package io.droksty.transfersdemo.util;
 
 import io.droksty.transfersdemo.dto.AssociateDTO;
 import io.droksty.transfersdemo.dto.TransferDTO;
-import io.droksty.transfersdemo.dto.TransferListView;
 import io.droksty.transfersdemo.model.Associate;
 import io.droksty.transfersdemo.model.Transfer;
 
@@ -30,7 +29,9 @@ public final class Mapper {
                 transferDTO.getPriceNet(),
                 transferDTO.getClient() == null ? null : newAssociateFrom(transferDTO.getClient()),
                 transferDTO.getOperator() == null ? null : newAssociateFrom(transferDTO.getOperator()),
-                transferDTO.getOperatorCost()
+                transferDTO.getOperatorCost(),
+                transferDTO.getComments(),
+                transferDTO.getPaidBy()
         );
     }
 
@@ -50,6 +51,8 @@ public final class Mapper {
         dto.setClient(transfer.getClient() == null ? null : newAssociateDTOFrom(transfer.getClient()));
         dto.setOperator(transfer.getOperator() == null ? null : newAssociateDTOFrom(transfer.getOperator()));
         dto.setOperatorCost(transfer.getOperatorCost());
+        dto.setComments(transfer.getComments());
+        dto.setPaidBy(transfer.getPaidBy());
         return dto;
     }
 

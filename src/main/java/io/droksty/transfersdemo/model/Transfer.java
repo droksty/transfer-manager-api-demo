@@ -1,6 +1,5 @@
 package io.droksty.transfersdemo.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -8,18 +7,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Transfer entity bean.
- * A Transfer must always have non-null values on the following fields:
+ * Encapsulates a transfer service.
+ * @apiNote
  * <ul>
- *   <li>pickupDate</li>
- *   <li>pickupTime</li>
- *   <li>transferFrom</li>
- *   <li>transferTo</li>
+ *     <li>A transfer must always have non-null values on the following fields:
+ *         <ol>
+ *             <li>pickupDate</li>
+ *             <li>pickupTime</li>
+ *             <li>transferFrom</li>
+ *             <li>transferTo</li>
+ *         </ol>
+ *     </li>
+ *     <li>Unless both values are null, a transfer's client should not match its operator.</li>
  * </ul>
- * A Transfer's client should not be the same as its operator, unless both values are null.</li>
  */
 @Entity
-@Table(name = "Transfers", indexes = { @Index(name = "IX_PickupDate", columnList = "PickupDate") })
+@Table(name = "Transfers", indexes = { @Index(name = "date", columnList = "pickupDate") })
 public class Transfer {
     private Long        id;
     private LocalDate   pickupDate;
@@ -34,16 +37,16 @@ public class Transfer {
     private Associate   client;
     private Associate   operator;
     private Double      operatorCost;
+    private String      comments;
+    private PayerType   paidBy;
 
-
-    // Constructors
     public Transfer() {}
 
     public Transfer(Long id, LocalDate pickupDate, LocalTime pickupTime,
                     String passengerName, Integer totalPax, Type type,
                     String transferFrom, String transferTo, Double priceTotal,
                     Double priceNet, Associate client, Associate operator,
-                    Double operatorCost) {
+                    Double operatorCost, String comments, PayerType paidBy) {
         this.id = id;
         this.pickupDate = pickupDate;
         this.pickupTime = pickupTime;
@@ -57,10 +60,10 @@ public class Transfer {
         this.client = client;
         this.operator = operator;
         this.operatorCost = operatorCost;
+        this.comments = comments;
+        this.paidBy = paidBy;
     }
 
-
-    // Properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -172,8 +175,23 @@ public class Transfer {
         this.operatorCost = operatorCost;
     }
 
+    @Column(name = "Comments")
+    public String getComments() {
+        return comments;
+    }
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 
-    // Object methods
+    @Column(name = "PaidBy")
+    @Enumerated
+    public PayerType getPaidBy() {
+        return paidBy;
+    }
+    public void setPaidBy(PayerType paidBy) {
+        this.paidBy = paidBy;
+    }
+
     @Override
     public String toString() {
         return "Transfer{" +
@@ -185,13 +203,13 @@ public class Transfer {
                 ", type=" + type +
                 ", transferFrom='" + transferFrom + '\'' +
                 ", transferTo='" + transferTo + '\'' +
+                ", paidBy=" + paidBy +
                 ", priceTotal=" + priceTotal +
                 ", priceNet=" + priceNet +
                 ", client=" + client +
                 ", operator=" + operator +
                 ", operatorCost=" + operatorCost +
+                ", comments='" + comments + '\'' +
                 '}';
     }
 }
-
-
