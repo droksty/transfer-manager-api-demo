@@ -22,7 +22,7 @@ public final class TransferDTO {
     private AssociateDTO  operator;
     private Double        operatorCost;
     private String        comments;
-    private PayerType       paidBy;
+    private PayerType     paidBy;
 
     public Long         getId() {
         return id;
@@ -132,7 +132,6 @@ public final class TransferDTO {
         this.comments = comments;
     }
 
-
     public PayerType    getPaidBy() {
         return paidBy;
     }
@@ -144,20 +143,20 @@ public final class TransferDTO {
     public String toString() {
         return "TransferDTO{" +
                 "id=" + id +
-                ", pickupDate=" + pickupDate +
-                ", pickupTime=" + pickupTime +
-                ", passengerName='" + passengerName + '\'' +
-                ", totalPax=" + totalPax +
-                ", type=" + type +
-                ", transferFrom='" + transferFrom + '\'' +
-                ", transferTo='" + transferTo + '\'' +
-                ", paidBy=" + paidBy +
-                ", priceTotal=" + priceTotal +
-                ", priceNet=" + priceNet +
-                ", client=" + client +
-                ", operator=" + operator +
-                ", operatorCost=" + operatorCost +
-                ", comments='" + comments + '\'' +
+                ", pickupDate="     + pickupDate +
+                ", pickupTime="     + pickupTime +
+                ", passengerName="  + passengerName +
+                ", totalPax="       + totalPax +
+                ", type="           + type +
+                ", transferFrom="   + transferFrom +
+                ", transferTo="     + transferTo +
+                ", paidBy="         + paidBy +
+                ", priceTotal="     + priceTotal +
+                ", priceNet="       + priceNet +
+                ", client="         + client +
+                ", operator="       + operator +
+                ", operatorCost="   + operatorCost +
+                ", comments="       + comments +
                 '}';
     }
 }

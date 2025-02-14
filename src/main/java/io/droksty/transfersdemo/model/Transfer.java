@@ -196,20 +196,20 @@ public class Transfer {
     public String toString() {
         return "Transfer{" +
                 "id=" + id +
-                ", pickupDate=" + pickupDate +
-                ", pickupTime=" + pickupTime +
-                ", passengerName='" + passengerName + '\'' +
-                ", totalPax=" + totalPax +
-                ", type=" + type +
-                ", transferFrom='" + transferFrom + '\'' +
-                ", transferTo='" + transferTo + '\'' +
-                ", paidBy=" + paidBy +
-                ", priceTotal=" + priceTotal +
-                ", priceNet=" + priceNet +
-                ", client=" + client +
-                ", operator=" + operator +
-                ", operatorCost=" + operatorCost +
-                ", comments='" + comments + '\'' +
+                ", pickupDate="     + pickupDate +
+                ", pickupTime="     + pickupTime +
+                ", passengerName="  + passengerName +
+                ", totalPax="       + totalPax +
+                ", type="           + type +
+                ", transferFrom="   + transferFrom +
+                ", transferTo="     + transferTo +
+                ", paidBy="         + paidBy +
+                ", priceTotal="     + priceTotal +
+                ", priceNet="       + priceNet +
+                ", client="         + client +
+                ", operator="       + operator +
+                ", operatorCost="   + operatorCost +
+                ", comments="       + comments +
                 '}';
     }
 }
