@@ -142,7 +142,7 @@ public final class TransferDTO {
     @Override
     public String toString() {
         return "TransferDTO{" +
-                "id=" + id +
+                "id="               + id +
                 ", pickupDate="     + pickupDate +
                 ", pickupTime="     + pickupTime +
                 ", passengerName="  + passengerName +

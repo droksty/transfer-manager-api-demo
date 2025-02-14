@@ -7,19 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Encapsulates a transfer service.
- * @apiNote
- * <ul>
- *     <li>A transfer must always have non-null values on the following fields:
- *         <ol>
- *             <li>pickupDate</li>
- *             <li>pickupTime</li>
- *             <li>transferFrom</li>
- *             <li>transferTo</li>
- *         </ol>
- *     </li>
- *     <li>Unless both values are null, a transfer's client should not match its operator.</li>
- * </ul>
+ * Encapsulates a {@link Transfer} instance.<br>
+ * All {@code Transfer} instances are required to have valid,
+ * non-null values on their datetime and location related properties.<br>
+ * Moreover, unless both properties are null, a {@code Transfer}'s
+ * {@code client} should never match its {@code operator}.
  */
 @Entity
 @Table(name = "Transfers", indexes = { @Index(name = "date", columnList = "pickupDate") })
@@ -195,7 +187,7 @@ public class Transfer {
     @Override
     public String toString() {
         return "Transfer{" +
-                "id=" + id +
+                "id="               + id +
                 ", pickupDate="     + pickupDate +
                 ", pickupTime="     + pickupTime +
                 ", passengerName="  + passengerName +
