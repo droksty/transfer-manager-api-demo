@@ -1,5 +1,5 @@
 package io.droksty.transfersdemo.model;
 
-public enum Type {
+public enum TransferType {
     SHARED, PRIVATE, VIP
 }

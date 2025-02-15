@@ -1,7 +1,7 @@
 package io.droksty.transfersdemo.dto;
 
 import io.droksty.transfersdemo.model.PayerType;
-import io.droksty.transfersdemo.model.Type;
+import io.droksty.transfersdemo.model.TransferType;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ public final class TransferDTO {
     private LocalTime     pickupTime;
     private String        passengerName;
     private Integer       totalPax;
-    private Type          type;
+    private TransferType transferType;
     private String        transferFrom;
     private String        transferTo;
     private Double        priceTotal;
@@ -62,11 +62,11 @@ public final class TransferDTO {
         this.totalPax = totalPax;
     }
 
-    public Type         getType() {
-        return type;
+    public TransferType getType() {
+        return transferType;
     }
-    public void         setType(Type type) {
-        this.type = type;
+    public void         setType(TransferType transferType) {
+        this.transferType = transferType;
     }
 
     @NotNull(message = "Invalid transferFrom: transferFrom cannot be null")
@@ -147,7 +147,7 @@ public final class TransferDTO {
                 ", pickupTime="     + pickupTime +
                 ", passengerName="  + passengerName +
                 ", totalPax="       + totalPax +
-                ", type="           + type +
+                ", type="           + transferType +
                 ", transferFrom="   + transferFrom +
                 ", transferTo="     + transferTo +
                 ", paidBy="         + paidBy +

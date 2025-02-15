@@ -14,134 +14,138 @@ import java.time.LocalTime;
  * {@code client} should never match its {@code operator}.
  */
 @Entity
-@Table(name = "Transfers", indexes = { @Index(name = "date", columnList = "pickupDate") })
+@Table(name = "Transfers", indexes = { @Index(name = "ix_date", columnList = "Date") })
 public class Transfer {
-    private Long        id;
-    private LocalDate   pickupDate;
-    private LocalTime   pickupTime;
-    private String      passengerName;
-    private Integer     totalPax;
-    private Type        type;
-    private String      transferFrom;
-    private String      transferTo;
-    private Double      priceTotal;
-    private Double      priceNet;
-    private Associate   client;
-    private Associate   operator;
-    private Double      operatorCost;
-    private String      comments;
-    private PayerType   paidBy;
-
-    public Transfer() {}
-
-    public Transfer(Long id, LocalDate pickupDate, LocalTime pickupTime,
-                    String passengerName, Integer totalPax, Type type,
-                    String transferFrom, String transferTo, Double priceTotal,
-                    Double priceNet, Associate client, Associate operator,
-                    Double operatorCost, String comments, PayerType paidBy) {
-        this.id = id;
-        this.pickupDate = pickupDate;
-        this.pickupTime = pickupTime;
-        this.passengerName = passengerName;
-        this.totalPax = totalPax;
-        this.type = type;
-        this.transferFrom = transferFrom;
-        this.transferTo = transferTo;
-        this.priceTotal = priceTotal;
-        this.priceNet = priceNet;
-        this.client = client;
-        this.operator = operator;
-        this.operatorCost = operatorCost;
-        this.comments = comments;
-        this.paidBy = paidBy;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Long id;
 
-    @Column(nullable = false, name = "PickupDate")
-    public LocalDate getPickupDate() {
-        return pickupDate;
-    }
-    public void setPickupDate(LocalDate pickupDate) {
-        this.pickupDate = pickupDate;
-    }
+    @Column(nullable = false, name = "Date")
+    private LocalDate date;
 
-    @Column(nullable = false, name = "PickupTime")
-    public LocalTime getPickupTime() {
-        return pickupTime;
-    }
-    public void setPickupTime(LocalTime pickupTime) {
-        this.pickupTime = pickupTime;
-    }
+    @Column(nullable = false, name = "Time")
+    private LocalTime time;
 
-    @Column(name = "PassengerName")
-    public String getPassengerName() {
-        return passengerName;
-    }
-    public void setPassengerName(String passengerName) {
-        this.passengerName = passengerName;
-    }
+    @Column(name = "Name")
+    private String name;
 
-    @Column(name = "TotalPax")
-    public Integer getTotalPax() {
-        return totalPax;
-    }
-    public void setTotalPax(Integer totalPax) {
-        this.totalPax = totalPax;
-    }
+    @Column(name = "Pax")
+    private Integer pax;
 
     @Column(name = "Type")
     @Enumerated
-    public Type getType() {
-        return type;
-    }
-    public void setType(Type type) {
-        this.type = type;
-    }
+    private TransferType type;
 
     @Column(nullable = false, name = "TransferFrom")
-    public String getTransferFrom() {
-        return transferFrom;
-    }
-    public void setTransferFrom(String transferFrom) {
-        this.transferFrom = transferFrom;
-    }
+    private String from;
 
     @Column(nullable = false, name = "TransferTo")
-    public String getTransferTo() {
-        return transferTo;
-    }
-    public void setTransferTo(String transferTo) {
-        this.transferTo = transferTo;
-    }
+    private String to;
 
-    @Column(name = "PriceTotal")
-    public Double getPriceTotal() {
-        return priceTotal;
-    }
-    public void setPriceTotal(Double priceTotal) {
-        this.priceTotal = priceTotal;
-    }
+    @Column(name = "Total")
+    private Double total;
 
-    @Column(name = "PriceNet")
-    public Double getPriceNet() {
-        return priceNet;
-    }
-    public void setPriceNet(Double priceNet) {
-        this.priceNet = priceNet;
-    }
+    @Column(name = "Net")
+    private Double net;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @JoinColumn(foreignKey = @ForeignKey(name="ClientId"))
+    private Associate client;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @JoinColumn(foreignKey = @ForeignKey(name = "OperatorId"))
+    private Associate operator;
+
+    @Column(name = "Cost")
+    private Double cost;
+
+    @Column(name = "Comments")
+    private String comments;
+
+    @Column(name = "PaidBy")
+    @Enumerated
+    private PayerType paidBy;
+
+    public Transfer() {}
+
+    public Transfer(Long id, LocalDate date, LocalTime time, String from, String to) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.from = from;
+        this.to = to;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getPax() {
+        return pax;
+    }
+    public void setPax(Integer pax) {
+        this.pax = pax;
+    }
+
+    public TransferType getType() {
+        return type;
+    }
+    public void setType(TransferType type) {
+        this.type = type;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public Double getNet() {
+        return net;
+    }
+    public void setNet(Double net) {
+        this.net = net;
+    }
+
     public Associate getClient() {
         return client;
     }
@@ -149,9 +153,6 @@ public class Transfer {
         this.client = client;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    @JoinColumn(foreignKey = @ForeignKey(name = "OperatorId"))
     public Associate getOperator() {
         return operator;
     }
@@ -159,15 +160,13 @@ public class Transfer {
         this.operator = operator;
     }
 
-    @Column(name = "OperatorCost")
-    public Double getOperatorCost() {
-        return operatorCost;
+    public Double getCost() {
+        return cost;
     }
-    public void setOperatorCost(Double operatorCost) {
-        this.operatorCost = operatorCost;
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 
-    @Column(name = "Comments")
     public String getComments() {
         return comments;
     }
@@ -175,8 +174,6 @@ public class Transfer {
         this.comments = comments;
     }
 
-    @Column(name = "PaidBy")
-    @Enumerated
     public PayerType getPaidBy() {
         return paidBy;
     }
@@ -187,21 +184,21 @@ public class Transfer {
     @Override
     public String toString() {
         return "Transfer{" +
-                "id="               + id +
-                ", pickupDate="     + pickupDate +
-                ", pickupTime="     + pickupTime +
-                ", passengerName="  + passengerName +
-                ", totalPax="       + totalPax +
-                ", type="           + type +
-                ", transferFrom="   + transferFrom +
-                ", transferTo="     + transferTo +
-                ", paidBy="         + paidBy +
-                ", priceTotal="     + priceTotal +
-                ", priceNet="       + priceNet +
-                ", client="         + client +
-                ", operator="       + operator +
-                ", operatorCost="   + operatorCost +
-                ", comments="       + comments +
+                "id="         + id +
+                ", date="     + date +
+                ", time="     + time +
+                ", name="     + name +
+                ", pax="      + pax +
+                ", type="     + type +
+                ", from="     + from +
+                ", to="       + to +
+                ", total="    + total +
+                ", net="      + net +
+                ", paidBy="   + paidBy +
+                ", client="   + client +
+                ", operator=" + operator +
+                ", cost="     + cost +
+                ", comments=" + comments +
                 '}';
     }
 }

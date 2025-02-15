@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TransferRepository extends JpaRepository<Transfer, Long> {
-    List<Transfer> findAllByPickupDateBetweenOrderByPickupDateAscPickupTimeAsc(LocalDate from, LocalDate to);
+    List<Transfer> findAllByDateBetweenOrderByDateAscTimeAsc(LocalDate from, LocalDate to);
 }

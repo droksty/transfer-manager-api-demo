@@ -15,42 +15,37 @@ public final class Mapper {
 
 
     // Utility methods
-    public static Transfer newTransferFrom(TransferDTO transferDTO) {
-        return new Transfer(
-                transferDTO.getId(),
-                transferDTO.getPickupDate(),
-                transferDTO.getPickupTime(),
-                transferDTO.getPassengerName(),
-                transferDTO.getTotalPax(),
-                transferDTO.getType(),
-                transferDTO.getTransferFrom(),
-                transferDTO.getTransferTo(),
-                transferDTO.getPriceTotal(),
-                transferDTO.getPriceNet(),
-                transferDTO.getClient() == null ? null : newAssociateFrom(transferDTO.getClient()),
-                transferDTO.getOperator() == null ? null : newAssociateFrom(transferDTO.getOperator()),
-                transferDTO.getOperatorCost(),
-                transferDTO.getComments(),
-                transferDTO.getPaidBy()
-        );
+    public static Transfer newTransferFrom(TransferDTO dto) {
+        Transfer transfer = new Transfer(dto.getId(), dto.getPickupDate(), dto.getPickupTime(), dto.getTransferFrom(), dto.getTransferTo());
+        transfer.setName(dto.getPassengerName());
+        transfer.setPax(dto.getTotalPax());
+        transfer.setType(dto.getType());
+        transfer.setTotal(dto.getPriceTotal());
+        transfer.setNet(dto.getPriceNet());
+        transfer.setClient(dto.getClient() == null ? null : newAssociateFrom(dto.getClient()));
+        transfer.setOperator(dto.getOperator() == null ? null : newAssociateFrom(dto.getOperator()));
+        transfer.setCost(dto.getOperatorCost());
+        transfer.setComments(dto.getComments());
+        transfer.setPaidBy(dto.getPaidBy());
+        return transfer;
     }
 
     public static TransferDTO newTransferDTOFrom(Transfer transfer) {
         //should clients be transactional?
         TransferDTO dto = new TransferDTO();
         dto.setId(transfer.getId());
-        dto.setPickupDate(transfer.getPickupDate());
-        dto.setPickupTime(transfer.getPickupTime());
-        dto.setPassengerName(transfer.getPassengerName());
-        dto.setTotalPax(transfer.getTotalPax());
+        dto.setPickupDate(transfer.getDate());
+        dto.setPickupTime(transfer.getTime());
+        dto.setPassengerName(transfer.getName());
+        dto.setTotalPax(transfer.getPax());
         dto.setType(transfer.getType());
-        dto.setTransferFrom(transfer.getTransferFrom());
-        dto.setTransferTo(transfer.getTransferTo());
-        dto.setPriceTotal(transfer.getPriceTotal());
-        dto.setPriceNet(transfer.getPriceNet());
+        dto.setTransferFrom(transfer.getFrom());
+        dto.setTransferTo(transfer.getTo());
+        dto.setPriceTotal(transfer.getTotal());
+        dto.setPriceNet(transfer.getNet());
         dto.setClient(transfer.getClient() == null ? null : newAssociateDTOFrom(transfer.getClient()));
         dto.setOperator(transfer.getOperator() == null ? null : newAssociateDTOFrom(transfer.getOperator()));
-        dto.setOperatorCost(transfer.getOperatorCost());
+        dto.setOperatorCost(transfer.getCost());
         dto.setComments(transfer.getComments());
         dto.setPaidBy(transfer.getPaidBy());
         return dto;

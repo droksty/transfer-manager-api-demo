@@ -60,7 +60,7 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public List<Transfer> getTransfers(LocalDate from, LocalDate to, String client, String operator) {
-        List<Transfer> transfers = transferRepository.findAllByPickupDateBetweenOrderByPickupDateAscPickupTimeAsc(from, to);
+        List<Transfer> transfers = transferRepository.findAllByDateBetweenOrderByDateAscTimeAsc(from, to);
 
         return !client.isEmpty() || !operator.isEmpty() ? filterTransfers(transfers, client, operator) :transfers;
     }
