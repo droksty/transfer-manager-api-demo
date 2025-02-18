@@ -11,12 +11,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TransferServiceImpl implements TransferService {
-
-    // Section
     private final TransferRepository transferRepository;
 
     @Autowired
@@ -24,16 +21,22 @@ public class TransferServiceImpl implements TransferService {
         this.transferRepository = transferRepository;
     }
 
+    /* -- Method implementations -- */
 
-    // Method implementations
     @Override
     public Transfer insertOneTransfer(TransferDTO transferDTO) {
+        if (transferDTO.getId() != null)
+            throw new IllegalArgumentException("Illegal data: Non-null ID");
         Transfer transfer = Mapper.newTransferFrom(transferDTO);
         return transferRepository.save(transfer);
     }
 
     @Override
     public List<Transfer> insertManyTransfers(List<TransferDTO> transferDTOs) {
+        transferDTOs.forEach(transferDTO -> {
+            if (transferDTO.getId() != null)
+                throw new IllegalArgumentException("Illegal data: Non-null ID");
+        });
         List<Transfer> transfers = Mapper.newTransferListFrom(transferDTOs);
         return transferRepository.saveAll(transfers);
     }
@@ -62,11 +65,11 @@ public class TransferServiceImpl implements TransferService {
     public List<Transfer> getTransfers(LocalDate from, LocalDate to, String client, String operator) {
         List<Transfer> transfers = transferRepository.findAllByDateBetweenOrderByDateAscTimeAsc(from, to);
 
-        return !client.isEmpty() || !operator.isEmpty() ? filterTransfers(transfers, client, operator) :transfers;
+        return !client.isEmpty() || !operator.isEmpty() ? filterTransfers(transfers, client, operator) : transfers;
     }
 
+    /* -- Helpers -- */
 
-    // Helper
     private List<Transfer> filterTransfers(List<Transfer> transfers, String client, String operator) {
         List<Transfer> filteredTransfers = new ArrayList<>();
         for (Transfer transfer : transfers) {
