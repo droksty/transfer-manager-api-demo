@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,21 +61,18 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public List<Transfer> getTransfers(LocalDate from, LocalDate to, String client, String operator) {
-        List<Transfer> transfers = transferRepository.findAllByDateBetweenOrderByDateAscTimeAsc(from, to);
+    public List<Transfer> getTransfers(LocalDate from, LocalDate to, String clientUid, String operatorUid) {
+        List<Transfer> transfers;
 
-        return !client.isEmpty() || !operator.isEmpty() ? filterTransfers(transfers, client, operator) : transfers;
-    }
+        if (clientUid.isEmpty() && operatorUid.isEmpty())
+            transfers = transferRepository.findAllByDateBetweenOrderByDateAscTimeAsc(from, to);
+        else if (operatorUid.isEmpty())
+            transfers = transferRepository.findAllByDateBetweenAndClientUidEqualsOrderByDateAscTimeAsc(from, to, clientUid);
+        else if (clientUid.isEmpty())
+            transfers = transferRepository.findAllByDateBetweenAndOperatorUidEqualsOrderByDateAscTimeAsc(from, to, operatorUid);
+        else
+            transfers = transferRepository.findAllByDateBetweenAndClientUidEqualsOrOperatorUidEqualsOrderByDateAscTimeAsc(from, to, operatorUid, clientUid);
 
-    /* -- Helpers -- */
-
-    private List<Transfer> filterTransfers(List<Transfer> transfers, String client, String operator) {
-        List<Transfer> filteredTransfers = new ArrayList<>();
-        for (Transfer transfer : transfers) {
-            if ((transfer.getClient() != null && transfer.getClient().getTitle().equals(client)) || transfer.getOperator() != null && transfer.getOperator().getTitle().equals(operator)) {
-                filteredTransfers.add(transfer);
-            }
-        }
-        return filteredTransfers;
+        return transfers;
     }
 }
