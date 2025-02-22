@@ -18,9 +18,9 @@ public final class TransferListView {
 
         transferListDTO.forEach(t -> {
             listView.transfers.add(t);
-            listView.setTotalSales(listView.getTotalSales() + (t.getPriceTotal() != null ? t.getPriceTotal() : 0));
-            listView.setTotalNet(listView.getTotalNet() + (t.getPriceNet() != null ? t.getPriceNet() : 0));
-            listView.setTotalCost(listView.getTotalCost() + (t.getOperatorCost() != null ? t.getOperatorCost() : 0));
+            listView.setTotalSales(listView.getTotalSales() + (t.getTotal() != null ? t.getTotal() : 0));
+            listView.setTotalNet(listView.getTotalNet() + (t.getNet() != null ? t.getNet() : 0));
+            listView.setTotalCost(listView.getTotalCost() + (t.getCost() != null ? t.getCost() : 0));
         });
 
         return listView;

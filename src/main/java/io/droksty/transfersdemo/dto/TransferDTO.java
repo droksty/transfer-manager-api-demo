@@ -8,21 +8,43 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public final class TransferDTO {
-    private Long          id;
-    private LocalDate     pickupDate;
-    private LocalTime     pickupTime;
-    private String        passengerName;
-    private Integer       totalPax;
-    private TransferType transferType;
-    private String        transferFrom;
-    private String        transferTo;
-    private Double        priceTotal;
-    private Double        priceNet;
-    private AssociateDTO  client;
-    private AssociateDTO  operator;
-    private Double        operatorCost;
-    private String        comments;
-    private PayerType     paidBy;
+    private Long id;
+
+    @NotNull(message = "Required field: date")
+    private LocalDate date;
+
+    @NotNull(message = "Required field: to")
+    private LocalTime time;
+
+    private String name;
+
+    @PositiveOrZero(message = "Number of pax cannot be negative")
+    private Integer pax;
+
+    private TransferType type;
+
+    @NotNull(message = "Required field: from")
+    @Size(min = 3, max = 30, message = "Enter a value between 3 to 30 characters for field: from")
+    private String from;
+
+    @NotNull(message = "Required field: to")
+    @Size(min = 3, max = 30, message = "Enter a value between 3 to 30 characters for field: to")
+    private String to;
+
+    @PositiveOrZero(message = "total cannot be negative")
+    private Double total;
+
+    @PositiveOrZero(message = "net cannot be negative")
+    private Double net;
+
+    private AssociateDTO client;
+    private AssociateDTO operator;
+
+    @PositiveOrZero(message = "cost cannot be negative")
+    private Double cost;
+
+    private String comments;
+    private PayerType paidBy;
 
     public Long         getId() {
         return id;
@@ -31,76 +53,67 @@ public final class TransferDTO {
         this.id = id;
     }
 
-    @NotNull(message = "Invalid pickupDate: pickupDate is null")
-    public LocalDate    getPickupDate() {
-        return pickupDate;
+    public LocalDate    getDate() {
+        return date;
     }
-    public void         setPickupDate(LocalDate pickupDate) {
-        this.pickupDate = pickupDate;
-    }
-
-    @NotNull(message = "Invalid pickupTime: pickupTime is null")
-    public LocalTime    getPickupTime() {
-        return pickupTime;
-    }
-    public void         setPickupTime(LocalTime pickupTime) {
-        this.pickupTime = pickupTime;
+    public void         setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public String       getPassengerName() {
-        return passengerName;
+    public LocalTime    getTime() {
+        return time;
     }
-    public void         setPassengerName(String passengerName) {
-        this.passengerName = passengerName;
+    public void         setTime(LocalTime time) {
+        this.time = time;
     }
 
-    @PositiveOrZero(message = "Invalid totalPax: totalPax cannot be a negative number")
-    public Integer      getTotalPax()     {
-        return totalPax;
+    public String       getName() {
+        return name;
     }
-    public void         setTotalPax(Integer totalPax) {
-        this.totalPax = totalPax;
+    public void         setName(String name) {
+        this.name = name;
+    }
+
+    public Integer      getPax()     {
+        return pax;
+    }
+    public void         setPax(Integer pax) {
+        this.pax = pax;
     }
 
     public TransferType getType() {
-        return transferType;
+        return type;
     }
-    public void         setType(TransferType transferType) {
-        this.transferType = transferType;
-    }
-
-    @NotNull(message = "Invalid transferFrom: transferFrom cannot be null")
-    @Size(min = 3, max = 30, message = "Invalid transferFrom: Must be between 3 to 30 characters long.")
-    public String       getTransferFrom() {
-        return transferFrom;
-    }
-    public void         setTransferFrom(String transferFrom) {
-        this.transferFrom = transferFrom.trim();
+    public void         setType(TransferType type) {
+        this.type = type;
     }
 
-    @NotNull(message = "Invalid transferTo: transferTo cannot be null")
-    @Size(min = 3, max = 30, message = "Invalid transferTo: Must be between 3 to 30 characters long.")
-    public String       getTransferTo() {
-        return transferTo;
+    public String       getFrom() {
+        return from;
     }
-    public void         setTransferTo(String transferTo) {
-        this.transferTo = transferTo.trim();
+    public void         setFrom(String from) {
+        this.from = from.trim();
     }
 
-    @PositiveOrZero(message = "Invalid priceTotal: priceTotal cannot be negative")
-    public Double       getPriceTotal() {
-        return priceTotal;
+    public String       getTo() {
+        return to;
     }
-    public void         setPriceTotal(Double priceTotal) {
-        this.priceTotal = priceTotal;
+    public void         setTo(String to) {
+        this.to = to.trim();
     }
 
-    @PositiveOrZero(message = "Invalid priceNet: priceNet cannot be negative")
-    public Double       getPriceNet() {
-        return priceNet;
+    public Double       getTotal() {
+        return total;
     }
-    public void         setPriceNet(Double priceNet) {
-        this.priceNet = priceNet;
+    public void         setTotal(Double total) {
+        this.total = total;
+    }
+
+    public Double       getNet() {
+        return net;
+    }
+    public void         setNet(Double net) {
+        this.net = net;
     }
 
     public AssociateDTO getClient() {
@@ -117,12 +130,11 @@ public final class TransferDTO {
         this.operator = operator;
     }
 
-    @PositiveOrZero(message = "Invalid operatorCost: operatorCost cannot be negative")
-    public Double       getOperatorCost() {
-        return operatorCost;
+    public Double       getCost() {
+        return cost;
     }
-    public void         setOperatorCost(Double operatorCost) {
-        this.operatorCost = operatorCost;
+    public void         setCost(Double cost) {
+        this.cost = cost;
     }
 
     public String       getComments() {
@@ -142,21 +154,21 @@ public final class TransferDTO {
     @Override
     public String toString() {
         return "TransferDTO{" +
-                "id="               + id +
-                ", pickupDate="     + pickupDate +
-                ", pickupTime="     + pickupTime +
-                ", passengerName="  + passengerName +
-                ", totalPax="       + totalPax +
-                ", type="           + transferType +
-                ", transferFrom="   + transferFrom +
-                ", transferTo="     + transferTo +
-                ", paidBy="         + paidBy +
-                ", priceTotal="     + priceTotal +
-                ", priceNet="       + priceNet +
-                ", client="         + client +
-                ", operator="       + operator +
-                ", operatorCost="   + operatorCost +
-                ", comments="       + comments +
+                "id="           + id +
+                ", date="       + date +
+                ", time="       + time +
+                ", name="       + name +
+                ", pax="        + pax +
+                ", type="       + type +
+                ", from="       + from +
+                ", to="         + to +
+                ", paidBy="     + paidBy +
+                ", total="      + total +
+                ", net="        + net +
+                ", client="     + client +
+                ", operator="   + operator +
+                ", cost="       + cost +
+                ", comments="   + comments +
                 '}';
     }
 }
