@@ -52,19 +52,11 @@ public final class Mapper {
     }
 
     public static Associate newAssociateFrom(AssociateDTO associateDTO) {
-        return new Associate(
-                associateDTO.getId(),
-                associateDTO.getTitle(),
-                associateDTO.getUid()
-        );
+        return new Associate(associateDTO.getId(), associateDTO.getTitle(), associateDTO.getUid());
     }
 
     public static AssociateDTO newAssociateDTOFrom(Associate associate) {
-        return new AssociateDTO(
-                associate.getId(),
-                associate.getTitle(),
-                associate.getUid()
-        );
+        return new AssociateDTO(associate.getId(), associate.getTitle(), associate.getUid());
     }
 
     public static List<Transfer> newTransferListFrom(List<TransferDTO> transferDTOList) {

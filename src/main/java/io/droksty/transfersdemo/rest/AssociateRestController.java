@@ -5,7 +5,7 @@ import io.droksty.transfersdemo.model.Associate;
 
 import io.droksty.transfersdemo.service.AssociateService;
 import io.droksty.transfersdemo.util.Mapper;
-import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,6 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/associates")
 public class AssociateRestController {
-
-    // Section
     private final AssociateService service;
 
     @Autowired
@@ -26,32 +24,26 @@ public class AssociateRestController {
         this.service = service;
     }
 
+    /* -- Endpoints -- */
 
-    // Endpoints
     @PostMapping("")
-    public ResponseEntity<AssociateDTO> newAssociate(@RequestBody AssociateDTO associateDTO) {
-        // Implement validation ?
+    public ResponseEntity<AssociateDTO> newAssociate(@RequestBody @Valid AssociateDTO associateDTO) {
         Associate insertedAssociate = service.insertAssociate(associateDTO);
         AssociateDTO insertedAssociateDTO = Mapper.newAssociateDTOFrom(insertedAssociate);
         return new ResponseEntity<>(insertedAssociateDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("")
-    public ResponseEntity<AssociateDTO> updateAssociate(@RequestBody AssociateDTO associateDTO) {
-        // Implement validation ?
+    public ResponseEntity<AssociateDTO> updateAssociate(@RequestBody @Valid AssociateDTO associateDTO) {
         Associate updatedAssociate = service.updateAssociate(associateDTO);
-        AssociateDTO updateAssociateDTO = Mapper.newAssociateDTOFrom(updatedAssociate);
-        return new ResponseEntity<>(updateAssociateDTO, HttpStatus.OK);
+        AssociateDTO updatedAssociatedDTO = Mapper.newAssociateDTOFrom(updatedAssociate);
+        return new ResponseEntity<>(updatedAssociatedDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAssociate(@PathVariable("id") Long id) {
-        if (id == null)
-            throw new IllegalArgumentException("Error. Id cannot be null");
-        if (!service.existsById(id))
-            throw new EntityNotFoundException("Error. Associate wih Id:" + id + " does not exist.");
         service.deleteAssociate(id);
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        return new ResponseEntity<>("Associate deleted", HttpStatus.OK);
     }
 
     @GetMapping("")
@@ -60,5 +52,4 @@ public class AssociateRestController {
         List<AssociateDTO> associatesDTO = Mapper.newAssociateDTOListFrom(associates);
         return new ResponseEntity<>(associatesDTO, HttpStatus.OK);
     }
-
 }

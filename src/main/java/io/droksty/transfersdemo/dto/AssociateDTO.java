@@ -1,9 +1,15 @@
 package io.droksty.transfersdemo.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public final class AssociateDTO {
-    private final Long      id;
-    private final String    title;
-    private final String    uid;
+    private final Long id;
+
+    @NotNull(message = "Required field: title")
+    private final String title;
+
+    @NotNull(message = "Required field: uid")
+    private final String uid;
 
     public AssociateDTO(Long id, String title, String uid) {
         this.id = id;

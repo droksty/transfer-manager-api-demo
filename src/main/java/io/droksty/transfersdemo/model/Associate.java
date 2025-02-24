@@ -3,25 +3,24 @@ package io.droksty.transfersdemo.model;
 import jakarta.persistence.*;
 
 /**
- * Encapsulates an {@link Associate} instance that represents
- * either the client or the operator of a {@link Transfer} instance.
+ * An {@link Associate} instance represents either
+ * the client or the operator of a {@link Transfer}.
  */
 @Entity
 @Table(name = "Associates")
-public final class Associate {
+public class Associate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private Long    id;
+    private Long id;
 
     @Column(name = "Title", unique = true, nullable = false)
-    private String  title;
+    private String title;
 
     @Column(name = "Uid", unique = true, nullable = false)
-    private String  uid;
+    private String uid;
 
-    public Associate() {
-    }
+    public Associate() {}
 
     public Associate(Long id, String title, String uid) {
         this.id = id;
@@ -55,7 +54,7 @@ public final class Associate {
         return "Associate{" +
                 "id="       + id +
                 ", uid="    + uid +
-                ", title=" + title +
+                ", title="  + title +
                 '}';
     }
 }
