@@ -11,3 +11,4 @@
 ###### 0.1.6-SNAPSHOT : Refactor GET endpoint, add filters
 ###### 0.1.7-SNAPSHOT : Implement Transfer validation
 ###### 0.1.8-SNAPSHOT : Extend Transfer with comments and payer data
+###### 0.1.9-SNAPSHOT : Update Transfer & Associate
