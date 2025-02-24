@@ -18,8 +18,6 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/transfers")
 public class TransferRestController {
-
-    // Section
     private final TransferService service;
 
     @Autowired
@@ -27,8 +25,8 @@ public class TransferRestController {
         this.service = service;
     }
 
+    /* -- Endpoints -- */
 
-    // Endpoints
     @PostMapping("")
     public ResponseEntity<TransferDTO> newTransfer(@RequestBody @Valid TransferDTO transferDTO) {
         System.out.println(transferDTO);
@@ -49,7 +47,6 @@ public class TransferRestController {
 
     @PutMapping("")
     public ResponseEntity<TransferDTO> updateTransfer(@RequestBody @Valid TransferDTO transferDTO) {
-        if (transferDTO.getId() == null) throw new IllegalArgumentException("Transfer id is null.");
         System.out.println(transferDTO);
         Transfer updatedTransfer = service.updateTransfer(transferDTO);
         System.out.println(updatedTransfer);
